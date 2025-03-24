@@ -1,0 +1,18 @@
+# Maxfiy ma'lumotlar
+.env
+core/settings.py
+db.sqlite3
+
+# Python tomonidan yaratilgan fayllar
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual muhit fayllari
+.venv/
+venv/
+
+# IDE va tahrirlovchi kesh fayllari
+.vscode/
+.idea/
