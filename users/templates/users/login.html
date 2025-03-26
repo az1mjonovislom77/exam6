@@ -36,9 +36,12 @@
 
                     <div class="row g-2 mt-2">
                         <div class="col-sm-6"><a class="btn btn-outline-google-plus btn-sm d-block w-100" href="{% url "social:begin" "google-oauth2" %}"><span
-                                class="fab fa-google-plus-g me-2" data-fa-transform="grow-8"></span> google</a></div>
+                                class="fab fa-google-plus-g me-2" data-fa-transform="grow-8"></span>Google</a></div>
                         <div class="col-sm-6"><a class="btn btn-outline-google-plus btn-sm d-block w-100" href="{% url 'social:begin' 'github' %}"><span
-                                class="fab fa-github-square me-2" data-fa-transform="grow-8"></span> GitHub</a>
+                                class="fab fa-github-square me-2" data-fa-transform="grow-8"></span>GitHub</a>
+                        </div>
+                        <div class="col-sm-6"><a class="btn btn-outline-facebook btn-sm d-block w-100" href="{% url 'social:begin' 'facebook' %}"><span
+                                class="fab fa-facebook-square me-2" data-fa-transform="grow-8"></span>Facebook</a>
                         </div>
                     </div>
                     <p class="mt-3">Hisobingiz yo‘qmi? <a href="{% url 'users:register_page' %}">Ro‘yxatdan o‘tish</a>

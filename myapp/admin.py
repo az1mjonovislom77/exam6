@@ -77,6 +77,7 @@ class CustomerAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'phone', 'billing_address', 'joined_date')
     search_fields = ('name', 'email', 'phone')
     list_filter = ('billing_address',)
+    readonly_fields = ('vat_number',)
 
 
 admin.site.register(Attribute)

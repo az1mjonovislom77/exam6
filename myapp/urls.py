@@ -1,11 +1,10 @@
 from django.urls import path
 from .views import (
     IndexView, ProductListView, ProductDetailView, CategoryProductsView, place_order, LikeProductView,
-    CustomerListView, CustomerCreateView, CustomerUpdateView, CustomerDeleteView, CustomerDetailView
+    CustomerListView, CustomerCreateView, CustomerUpdateView, CustomerDeleteView, customer_detail_view
 )
 from django.conf import settings
 from django.conf.urls.static import static
-
 
 app_name = "myapp"
 
@@ -17,6 +16,7 @@ urlpatterns = [
                   path('order/<slug:slug>/', place_order, name='place_order'),
                   path('like/<slug:slug>/', LikeProductView.as_view(), name='like_product'),
                   path('customers/', CustomerListView.as_view(), name='customer_table'),
+                  path('customer/<int:pk>/', customer_detail_view, name='customer_detail'),
                   path('add-customer/', CustomerCreateView.as_view(), name='add_customer'),
                   path('edit-customer/<int:pk>/', CustomerUpdateView.as_view(), name='edit_customer'),
                   path('delete-customer/<int:pk>/', CustomerDeleteView.as_view(), name='delete_customer'),

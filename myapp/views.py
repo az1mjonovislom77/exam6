@@ -174,8 +174,6 @@ class CustomerDeleteView(DeleteView):
         return super().delete(request, *args, **kwargs)
 
 
-class CustomerDetailView(DetailView):
-    model = Customer
-    template_name = 'myapp/customer-details.html'
-    slug_field = 'slug'
-    slug_url_kwarg = 'slug'
+def customer_detail_view(request, pk):
+    customer = get_object_or_404(Customer, pk=pk)
+    return render(request, 'myapp/customer_details.html', {'customer': customer})

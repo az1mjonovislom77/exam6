@@ -1,4 +1,6 @@
 from decimal import Decimal
+import random
+
 from django.db import models
 from users.models import CustomUser
 from django.utils.timezone import now
@@ -95,13 +97,14 @@ class Customer(models.Model):
     billing_address = models.TextField()
     joined_date = models.DateTimeField(default=now)
     image = models.ImageField(upload_to='customer_images/', blank=True, null=True)
+    vat_number = models.CharField(max_length=9, unique=True, blank=True)
 
     def __str__(self):
         return self.name
 
     @property
     def get_absolute_url(self):
-        return self.image.url
+        return self.image.url if self.image else ""
 
 
 class Attribute(models.Model):
