@@ -3,61 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Successful Registration</title>
-    <meta http-equiv="refresh" content="5;url={% url 'myapp:index' %}">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
+    <title>Email Verification</title>
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to right, #4facfe, #00f2fe);
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            text-align: center;
-            color: #fff;
         }
-
         .container {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
+            background-color: white;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            width: 90%;
-            max-width: 450px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
         }
-
         h2 {
+            color: #333;
             font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
-
         p {
+            color: #777;
             font-size: 16px;
-            font-weight: 300;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        label {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+            display: block;
+            text-align: left;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+        }
+        input[type="text"]:focus {
+            border-color: #007bff;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <h2>Welcome, {{ user.username }}!</h2>
-        <p>You have successfully registered on our website.</p>
-        <p>Thank you for joining us!</p>
+        <h2>Email Verification</h2>
+        <p>Please enter the verification code sent to your email.</p>
+        <form method="POST" action="/users/verify/">
+            {% csrf_token %}
+            <label for="verification_code">Verification Code:</label>
+            <input type="text" name="verification_code" required>
+            <button type="submit">Verify</button>
+        </form>
     </div>
-
-
 </body>
 </html>

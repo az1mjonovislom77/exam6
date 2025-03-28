@@ -1,10 +1,14 @@
+import os
 import random
-from django.db.models.signals import pre_save
+import json
+from django.db.models.signals import pre_save, pre_delete
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.conf import settings
+
+from core.settings import BASE_DIR
 from .models import Customer, Category, Order, Product
 
 User = get_user_model()
@@ -109,3 +113,33 @@ def category_deleted(sender, instance, **kwargs):
     subject = 'Kategoriya o‘chirildi'
     message = f'Kategoriya o‘chirildi:\n\nNomi: {instance.title}'
     notify_superusers(subject, message)
+
+
+data = Product
+
+
+@receiver(pre_delete, sender=Product)
+def save_data_before_deleted(sender, instance, **kwargs):
+    data = {
+        'name': instance.name,
+        'description': instance.description,
+        'price': float(instance.price),
+        'image': str(instance.image.url),
+        'discount': instance.discount,
+        'quantity': instance.quantity,
+        'category': instance.category.id
+    }
+    file_path = os.path.join(BASE_DIR, 'myapp', 'backup', 'product_backup.json')
+    if os.path.exists(file_path):
+        with open(file_path) as f:
+            try:
+                product_data = json.load(f)
+            except json.JSONDecodeError:
+                product_data = []
+    else:
+        product_data = []
+    product_data.append(data)
+    with open(file_path, 'w') as f:
+        json.dump(product_data, f, indent=4)
+
+    print('Product successfully saved')
