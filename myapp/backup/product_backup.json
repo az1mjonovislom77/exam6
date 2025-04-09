@@ -7,5 +7,14 @@
         "discount": 0,
         "quantity": 1,
         "category": 1
+    },
+    {
+        "name": "djwdhwjhqwjhh",
+        "description": "rfhuihfuh3f",
+        "price": 1200.0,
+        "image": "/media/images/no_image.png",
+        "discount": 1,
+        "quantity": 12,
+        "category": 2
     }
 ]

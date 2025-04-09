@@ -619,9 +619,12 @@
                                             {{ product.name }}
                                         </a>
                                     </h5>
-                                    <h5 class="fs-md-2 text-warning mb-0 d-flex align-items-center mb-2">
-                                        ${{ product.price }}
-                                    </h5>
+                                    <h3 class="fs-md-2 text-warning mb-0 d-flex align-items-center mb-2">
+                                        Price: ${{ product.price }}
+                                    </h3>
+                                    <h3 class="fs-md-2 text-warning mb-0 d-flex align-items-center mb-2">
+                                        Discount: {{ product.discount }}%
+                                    </h3>
                                 </div>
                             </div>
                             <div class="d-flex flex-between-center px-3">

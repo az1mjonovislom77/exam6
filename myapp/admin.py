@@ -1,3 +1,4 @@
+import csv
 from django.contrib import admin
 from django.contrib.auth.admin import Group, UserAdmin
 from django.utils.html import format_html
@@ -5,6 +6,8 @@ from myapp.models import Product, Category, Order, ProductImage, Customer, Attri
 from users.models import CustomUser
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
+from django.contrib import admin
+from django.http import HttpResponse
 
 admin.site.unregister(Group)
 
@@ -78,8 +81,35 @@ class CustomerAdmin(admin.ModelAdmin):
     search_fields = ('name', 'email', 'phone')
     list_filter = ('billing_address',)
     readonly_fields = ('vat_number',)
+    actions = ['export_as_csv']
 
 
 admin.site.register(Attribute)
 admin.site.register(AttributeValue)
 admin.site.register(ProductAttribute)
+
+
+
+# Register your models here.
+
+# admin.site.register(Customer)
+
+class ExportCsvMixin:
+    def export_as_csv(self, request, queryset):
+
+        meta = self.model._meta
+        print(meta.fields)
+        field_names = [field.name for field in meta.fields]
+
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename={}.csv'.format(meta)
+        writer = csv.writer(response)
+
+        writer.writerow(field_names)
+        for obj in queryset:
+            row = writer.writerow([getattr(obj, field) for field in field_names])
+
+        return response
+
+    export_as_csv.short_description = "Export Selected"
+

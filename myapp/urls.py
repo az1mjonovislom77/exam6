@@ -1,8 +1,10 @@
 from django.urls import path
 from .views import (
     IndexView, ProductListView, ProductDetailView, CategoryProductsView, place_order, LikeProductView,
-    CustomerListView, CustomerCreateView, CustomerUpdateView, CustomerDeleteView, customer_detail_view
+    CustomerListView, CustomerCreateView, CustomerUpdateView, CustomerDeleteView, customer_detail_view,
 )
+
+from myapp import views
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -20,4 +22,5 @@ urlpatterns = [
                   path('add-customer/', CustomerCreateView.as_view(), name='add_customer'),
                   path('edit-customer/<int:pk>/', CustomerUpdateView.as_view(), name='edit_customer'),
                   path('delete-customer/<int:pk>/', CustomerDeleteView.as_view(), name='delete_customer'),
+                  path('export-data/',views.export_data,name='export_data')
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
