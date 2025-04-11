@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-from django.contrib.auth import get_user_model
 
 load_dotenv()
 
@@ -29,7 +28,7 @@ SECRET_KEY = 'django-insecure-t8lraf^fot=s@d*jg0l^8ol!psecf*wj1rk=nk+6(4&m_#_qow
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Application definition
 
@@ -56,6 +55,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'core.middleware.RequestLoggingMiddleware',
+    'core.middleware.AutoLogoutMiddleWare',
+    'core.middleware.TimeRestrictedAccessMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -100,7 +102,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
 
@@ -168,3 +170,7 @@ SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
     'fields': 'id, name, email'
 }
+
+
+SESSION_COOKIE_AGE = 60 # seconds
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
