@@ -43,3 +43,4 @@ class TimeRestrictedAccessMiddleware:
         if time(1, 0) < current_time < time(2, 0): 
             return HttpResponse("Sayt shu vaqt oralig‘ida yopiq.", status=403)
         return self.get_response(request)
+
